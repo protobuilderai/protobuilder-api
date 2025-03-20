@@ -6,7 +6,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
+# Use a single connection for the in-memory database
+SQLALCHEMY_DATABASE_URL = "sqlite:///file::memory:?cache=shared"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
