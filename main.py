@@ -5,14 +5,22 @@ import models
 import database
 from pydantic import BaseModel
 from fastapi.responses import Response
+from contextlib import asynccontextmanager
+import logging
 
-app = FastAPI(title="Key/Value Store API")
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
-@app.on_event("startup")
-async def startup():
-    # Create tables
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Creating database tables...")
     models.Base.metadata.create_all(bind=database.engine)
+    logger.info("Database tables created successfully")
+    yield
+
+
+app = FastAPI(title="Key/Value Store API", lifespan=lifespan)
 
 
 @app.head("/")
