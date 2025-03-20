@@ -4,11 +4,17 @@ from typing import List
 import models
 import database
 from pydantic import BaseModel
+from fastapi.responses import Response
 
 # Create database tables
 models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI(title="Key/Value Store API")
+
+
+@app.head("/")
+async def root():
+    return Response(status_code=200)
 
 
 # Pydantic models for request/response
