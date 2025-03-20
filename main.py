@@ -15,8 +15,12 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Creating database tables...")
-    models.Base.metadata.create_all(bind=database.engine)
-    logger.info("Database tables created successfully")
+    try:
+        models.Base.metadata.create_all(bind=database.engine)
+        logger.info("Database tables created successfully")
+    except Exception as e:
+        logger.error(f"Error creating database tables: {e}")
+        raise
     yield
 
 
