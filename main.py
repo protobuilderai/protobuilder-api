@@ -6,10 +6,13 @@ import database
 from pydantic import BaseModel
 from fastapi.responses import Response
 
-# Create database tables
-models.Base.metadata.create_all(bind=database.engine)
-
 app = FastAPI(title="Key/Value Store API")
+
+
+@app.on_event("startup")
+async def startup():
+    # Create tables
+    models.Base.metadata.create_all(bind=database.engine)
 
 
 @app.head("/")
