@@ -17,16 +17,23 @@ pip install -r requirements.txt
 
 3. Run the application:
 ```bash
-uvicorn main:app --reload
+python run.py
 ```
 
-The API will be available at http://localhost:8000
+The API will be available at http://localhost:10000
+
+## Running on Render
+
+This application is configured to run on Render:
+- Binds to host 0.0.0.0
+- Uses the PORT environment variable (defaults to 10000)
+- Handles HTTP requests properly
 
 ## API Documentation
 
 Once the server is running, you can access:
-- Interactive API docs (Swagger UI): http://localhost:8000/docs
-- Alternative API docs (ReDoc): http://localhost:8000/redoc
+- Interactive API docs (Swagger UI): http://localhost:10000/docs
+- Alternative API docs (ReDoc): http://localhost:10000/redoc
 
 ## Available Endpoints
 
@@ -39,24 +46,24 @@ Once the server is running, you can access:
 
 Create or update a key/value pair:
 ```bash
-curl -X POST "http://localhost:8000/kv/mykey" \
+curl -X POST "http://localhost:10000/kv/mykey" \
      -H "Content-Type: application/json" \
      -d '{"value": "myvalue"}'
 ```
 
 Get a value:
 ```bash
-curl "http://localhost:8000/kv/mykey"
+curl "http://localhost:10000/kv/mykey"
 ```
 
 List all keys:
 ```bash
-curl "http://localhost:8000/kv/"
+curl "http://localhost:10000/kv/"
 ```
 
 Delete a key:
 ```bash
-curl -X DELETE "http://localhost:8000/kv/mykey"
+curl -X DELETE "http://localhost:10000/kv/mykey"
 ```
 
 ## Note
