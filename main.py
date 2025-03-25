@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 import models
 import database
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from fastapi.responses import Response
 from contextlib import asynccontextmanager
 import logging
@@ -38,11 +38,10 @@ class KeyValueCreate(BaseModel):
 
 
 class KeyValueResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    
     key: str
     value: str
-
-    class Config:
-        from_attributes = True
 
 
 # CRUD operations

@@ -54,5 +54,5 @@ logs/
 
 # Project specific
 *.db
-*.sqlite3 
-__pycache__/database.cpython-312.pyc
+*.sqlite3
+file::memory:
