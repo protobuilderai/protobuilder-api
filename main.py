@@ -4,7 +4,6 @@ from typing import List
 import models
 import database
 from pydantic import BaseModel, ConfigDict
-from fastapi.responses import Response
 from contextlib import asynccontextmanager
 import logging
 
@@ -27,9 +26,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Key/Value Store API", lifespan=lifespan)
 
 
-@app.head("/")
+@app.get("/")
 async def root():
-    return Response(status_code=200)
+    return {"message": "Hello World"}
 
 
 # Pydantic models for request/response
