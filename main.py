@@ -6,6 +6,7 @@ import database
 from pydantic import BaseModel, ConfigDict
 from contextlib import asynccontextmanager
 import logging
+from datetime import datetime
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -29,6 +30,11 @@ app = FastAPI(title="Key/Value Store API", lifespan=lifespan)
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
+
+@app.get("/time")
+async def get_time():
+    return {"time": datetime.now().isoformat()}
 
 
 # Pydantic models for request/response
